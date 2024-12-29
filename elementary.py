@@ -4,15 +4,24 @@ import matplotlib.pyplot as plt
 
 class ElementaryCA:
     """
-    Given a rule as an integer, number of iterations and initial
-    configurations returns the image produced by the evolution of the
-    rule on the given configuration.
+    Given a rule as an integer, number of iterations and an initial
+    configuration, it returns the image produced by the evolution of the rule.
+
+    Parameters
+    ----------
+    rule : int
+        The rule to be applied.
+    iterations : int
+        The number of iterations.
+    initial_config : np.ndarray
+        The starting point.
+
+    Author: MAY.
     """
-    def __init__(self, rule: int, iterations: int, initial_config: np.ndarray):
+    def __init__(self, rule: int, initial_config: np.ndarray):
         
         # Attributes
         self.rule = rule
-        self.iterations = iterations
         self.array = initial_config
 
     # Obtain the table
@@ -60,7 +69,10 @@ class ElementaryCA:
         return new_array
                        
     # Iterate
-    def get_evolution(self):
+    def get_evolution(self, iterations: int):
+
+        # Store the iterations
+        self.iterations = iterations
 
         # Create an empty list
         image = []
@@ -81,5 +93,3 @@ class ElementaryCA:
             self.array = next_array
 
         return np.array(image)
-
-
