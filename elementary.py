@@ -63,6 +63,7 @@ class ElementaryCA:
             center = self.array[m]
             right = self.array[(m + 1) % lenght]
 
+            # Update the center cell
             new_array[m] = self.get_table()[(left, center, right)]
         
         return new_array
@@ -79,7 +80,7 @@ class ElementaryCA:
         # Append the initial array
         image.append(self.array)
 
-        # Get the left, center and right cells
+        # Loop for updating the state
         for i in range(self.iterations):
 
             # Get the next array
@@ -88,7 +89,7 @@ class ElementaryCA:
             # Store it
             image.append(next_array)
 
-            # Rename to continue
+            # Reassing to continue
             self.array = next_array
 
         return np.array(image)
