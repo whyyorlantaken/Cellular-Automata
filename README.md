@@ -2,7 +2,7 @@
 A little project on this awesome concept.
 
 <p align="center">
-  <img src="./Data/life/seeds/seeds.gif" width = "70%">
+  <img src="./Data/life/seeds/seeds.gif" width = "50%">
 </p>
 
 ## Elementary celullar automaton
