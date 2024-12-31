@@ -94,87 +94,84 @@ class LifeLikeCA:
         
         return counts
     
-    def movie(self, generations: int, processors: int, fps: int = 5,
-              path: str = ".", shape = (6, 6), cmap: str = "Blues",
-              gif_name: str = "movie", display: bool = False):
+    def images(self, generations: int, processors: int, path: str = ".",
+               shape = (6, 6), cmap: str = "Blues"):
+        
+        # Create the path
+        Path(path).mkdir(exist_ok = True)
         
         # Get the rules
         birth, survive = self.get_rules()
 
         # Save the initial state
-        self.image(state = self.matrix, path = path + "0000.png", shape = shape, cmap = cmap)
+        self.image(state = self.matrix, path = path + "0000.png",
+                   shape = shape, cmap = cmap)
+        
+        # Create an empty matrix
+        new_matrix = np.zeros_like(self.matrix, dtype = int)
 
         # Loop
         for m in range(generations):
 
-            # Create an empty matrix
-            new_matrix = np.zeros((self.n, self.m), dtype = int)
-
             # Get the neighbors
             all_neighbours = self.parallel_count(processors)
 
-            # Loop over each cell
-            for i in range(self.n):
-                for j in range(self.m):
+            # Apply the rules
+            # 1. Birth
+            birth_mask = (self.matrix == 0) & np.isin(all_neighbours, birth)
 
-                    # Cell neighbors
-                    neighbours = all_neighbours[i, j]
+            # 2. Survival
+            survive_mask = (self.matrix == 1) & np.isin(all_neighbours, survive)
 
-                    # Apply the rules:
-                    # 1. Birth
-                    if self.matrix[i, j] == 0 and neighbours in birth:
-                        new_matrix[i, j] = 1
-
-                    # 2. Survival
-                    elif self.matrix[i, j] == 1 and neighbours in survive:
-                        new_matrix[i, j] = 1
-
-                    # 3. Death
-                    else:
-                        new_matrix[i, j] = 0
-
-            # Restart
+            # Update the matrix
+            new_matrix[:] = np.where(birth_mask | survive_mask, 1, 0)
+            
+            # Update state
             self.matrix = new_matrix.copy()
 
             # Save the image
             self.image(state = self.matrix, path = f"{path}{str(m+1).zfill(4)}.png", shape = shape,
-                      cmap = cmap)
-            
-        # Print update
+                  cmap = cmap)
+        
+        # Print a message
         print(f"All images have been generated.\n")
+
+    def gif(self, path: str = None, name: str = "evolution", fps: int = 5,
+            display: bool = False, loop: int = 2):
 
         # Get all files
         files = Path(path).glob('*.png')
 
         # Sort them numerically
-        files = sorted(files, key=lambda x: int(x.stem))
+        files = sorted(files, key = lambda x: int(x.stem))
         
         # Create a list to save the images
         images = []
 
         # Read images with progress bar
-        for f in tqdm(files, desc="Reading images"):
+        for f in tqdm(files, desc = "Reading images"):
             images.append(imageio.imread(f))
     
         # Save GIF
-        imageio.mimsave(f'{path}/{gif_name}.gif', images, fps = fps, loop = 0)
+        imageio.mimsave(f'{path}/{name}.gif', images,
+                        fps = fps, loop = loop)
 
         # Print the direction of the gif
-        print(f"\nGif is in {path} as {gif_name}.gif.\n")
+        print(f"\nSaved {name}.gif at {path}.\n")
 
         # Display the GIF
         if display:
             
             print(f"Displaying the gif...\n")
 
-            return Image(filename = f'{path}/{gif_name}.gif')
+            return Image(filename = f'{path}/{name}.gif')
 
-    def image(self, state, path: str = ".", shape = (5,5),
+    def image(self, state, path: str = ".", shape = (5,5), dpi: int = 100,
               cmap: str = "Blues", show: bool = False, save: bool = True):
         
-        # Create the plot with tight layout and no padding
-        fig = plt.figure(figsize = shape, frameon=False)
-        plt.imshow(state, cmap = cmap, aspect='auto')
+        # Plot
+        fig = plt.figure(figsize = shape, frameon = False, dpi = dpi)
+        plt.imshow(state, cmap = cmap, aspect = 'equal', interpolation = "none")
         plt.axis("off")
         
         plt.gca().set_position([0, 0, 1, 1])
@@ -183,7 +180,7 @@ class LifeLikeCA:
         if show:
             plt.show()
         if save:
-            plt.savefig(path, bbox_inches='tight', pad_inches=0)
+            plt.savefig(path, bbox_inches='tight', pad_inches = 0, dpi = dpi)
         plt.close()
     
     def __str__(self):
