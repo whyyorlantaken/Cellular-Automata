@@ -1,5 +1,4 @@
 # Cellular Automata
-A little project on this awesome concept.
 
 <p align="center">
   <img src="./Data/life/seeds.gif" width = "50%">
