@@ -1,7 +1,7 @@
 # Cellular Automata
 
 <p align="center">
-  <img src="./Notebooks/Data/life/seeds/seeds-10fps.gif" width = "50%">
+  <img src="./Examples/Data/life/seeds/seeds-7fps.gif" width = "50%">
 </p>
 
 ## Elementary celullar automaton
