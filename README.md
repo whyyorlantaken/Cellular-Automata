@@ -3,7 +3,7 @@
   <img src="./Examples/Data/life/seeds/seeds-7fps.gif" width = "50%">
 </p>
 
-A cell can be either alive or dead, and its next state depend on a set of rules applied on its neighbor cells. The number of possible sets are determined by the *recognized* neighbors of the cell. In this repository we present two modules for the elementary and life-like cases. The first is in $1\rm D$ and takes $2$ neighbors (left and right) into account, while the second is in $2\rm D$ and uses the Moore neighbourhood ($8$ individuals). **The methods developed make it possible for all possible rules to be implemented because of binary encoding.**
+A cell can be either alive or dead, and its next state depend on a set of rules applied on its neighbor cells. The number of possible sets are determined by the *recognized* neighbors of the cell. In this repository we present two modules for the elementary and life-like cases. The first is in $1\rm D$ and takes $2$ neighbors (left and right) into account, while the second is in $2\rm D$ and uses the Moore neighbourhood ($8$ individuals). **The methods developed make it possible for all possible sets of rules to be implemented because of binary encoding.**
 
 ## Elementary case
 
