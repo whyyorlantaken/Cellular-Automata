@@ -22,4 +22,4 @@ The gif shown at the top of the description is the evolution of Conway's game of
   <img src="./Examples/Data/life/maze/0400.png" width = "50%">
 </p>
 
-It's been fun! Hoping to take a look at Lenia later.
+It's been fun! Hoping to take a look at Lenia soon.
