@@ -17,8 +17,9 @@ This is the $1\rm D$ case, the simplest. The image below shows the evolution of 
 
 A cellular automaton is of this type is in $2\rm D$, its cells can have two states, and their next one depends on the Moore neighbourhood. Still very simple, but pretty results can be achieved with good matrix inputs (generally, not easy to find), and letting the system evolve. The module `lifelike.py` has the class `LifeLikeCA` that can be used to implement any of the $2^{18}-1$ sets of rules. Again, usage of it can be found in the folder `Examples`. 
 
-The gif shown at the top of the description is the evolution of Conway's game of life; notice how the system ends up "destroying" itself with its own little spaceships!. I also leave you with this little maze (rule $31752$), which is one of my favourites.
+The gif shown at the top of the description is the evolution of Conway's game of life; notice how the system ends up "destroying" itself with its own little spaceships! I also leave this little maze (result of rule $31752$), which is one of my favourites.
 <p align="center">
-  <img src="./Examples/Data/life/maze/maze-20fps.gif" width = "50%">
+  <img src="./Examples/Data/life/maze/0400.png" width = "50%">
 </p>
 
+It's been fun! Hoping to take a look at Lenia later.
