@@ -10,7 +10,7 @@ A cell can be either alive or dead, and its next state depend on a set of rules 
 This is the $1\rm D$ case, the simplest. The image below shows the evolution of one of the possible $256$ sets of rules with different binary input arrays. The module `elementary.py` contains the class `ElementaryCA` from which any of the $256$ sets can be easily implemented. Examples can be found in `Examples/01-Elementary-CA.ipynb`.
 
 <p align="center">
-  <img src="./Data/output-75/evolution-rule-75.gif" width = "60%">
+  <img src="./Examples/Data/output-75/evolution-rule-75.gif" width = "60%">
 </p>
 
 ## Life-like case
